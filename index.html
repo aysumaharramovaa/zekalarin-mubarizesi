@@ -1,302 +1,173 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="az">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battle of Minds II</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zəkaların Mübarizəsi II</title>
+    <link src="style.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="data.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-        
-        * { transition: all 0.2s ease; }
-        
-        .logo-glow {
-            text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff;
-        }
-        
-        .question-card {
-            animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body class="bg-slate-950 text-slate-200 font-sans min-h-screen">
-
+    <script src="script.js"></script>
+  </head>
+  <body class="bg-slate-950 text-slate-200 min-h-screen">
     <!-- HEADER -->
-    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-2xl flex items-center justify-center text-3xl">🧠</div>
-                <h1 class="text-3xl font-semibold tracking-tighter logo-glow" style="font-family: 'Space Grotesk', sans-serif;">
-                    Battle of Minds <span class="text-cyan-400">II</span>
-                </h1>
-            </div>
+    <header
+      class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-x-3">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-2xl flex items-center justify-center text-3xl"
+          >
             
-            <div id="header-info" class="hidden items-center gap-x-8 text-sm font-medium">
-                <div onclick="goBackToCategories()" class="flex items-center gap-x-2 cursor-pointer hover:text-cyan-400">
-                    <span class="text-xl">←</span>
-                    <span>Kateqoriyalara qayıt</span>
-                </div>
-                <div id="current-category-display" class="px-5 py-2 bg-slate-900 rounded-3xl text-cyan-400 font-medium"></div>
-            </div>
+          </div>
+          <!-- <h1 class="text-3xl font-semibold tracking-tighter logo-glow">
+            Zəkaların Mübarizəsi <span class="text-cyan-400">II</span>
+          </h1> -->
         </div>
+
+        <div
+          id="header-info"
+          class="hidden items-center gap-x-8 text-sm font-medium"
+        >
+          <div
+            onclick="goBackToCategories()"
+            class="flex items-center gap-x-2 cursor-pointer hover:text-cyan-400"
+          >
+            <span class="text-xl">←</span>
+            <span>Kateqoriyalara qayıt</span>
+          </div>
+          <div
+            id="current-category-display"
+            class="px-5 py-2 bg-slate-900 rounded-3xl text-cyan-400 font-medium"
+          ></div>
+        </div>
+      </div>
     </header>
 
-    <!-- KATEQORİYA SEÇİM EKRANI -->
+    <!-- KATEQORİYA EKRANI -->
     <div id="category-screen" class="max-w-7xl mx-auto px-8 py-12">
-        <div class="text-center mb-16">
-            <h2 class="text-5xl font-semibold tracking-tighter mb-4">Kateqoriya seçin</h2>
-            <p class="text-slate-400 text-xl">Hər suala 20 saniyə vaxt verilir. Uğurlar!</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="categories-grid"></div>
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-semibold tracking-tighter mb-4">
+          Zəkaların Mübarizəsi II
+        </h2>
+        <p class="text-slate-400 text-xl">Kateqoriya seçin</p>
+      </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        id="categories-grid"
+      ></div>
     </div>
 
     <!-- QUIZ EKRANI -->
     <div id="quiz-screen" class="hidden max-w-4xl mx-auto px-8 py-10">
-        <div class="flex justify-between items-center mb-8">
-            <div class="flex items-center gap-x-4">
-                <span class="font-medium">Sual</span>
-                <span id="question-counter" class="text-4xl font-bold text-cyan-400">1</span>
-                <span class="text-slate-400">/</span>
-                <span id="total-questions" class="text-slate-400">3</span>
-            </div>
-            
-            <div class="flex items-center bg-slate-900 rounded-3xl px-6 py-3">
-                <span class="text-2xl mr-3">⏳</span>
-                <div>
-                    <div class="text-xs tracking-widest">QALAN VAXT</div>
-                    <div id="timer-display" class="text-4xl font-bold font-mono text-cyan-400">20</div>
-                </div>
-            </div>
-            
-            <div id="quiz-category-badge" class="px-6 py-2 bg-gradient-to-r from-cyan-400 to-violet-500 text-slate-950 rounded-3xl font-semibold"></div>
+      <!-- ... (quiz ekranı eyni qalır) ... -->
+      <div class="flex justify-between items-center mb-8">
+        <div class="flex items-center gap-x-4">
+          <span class="font-medium">Sual</span>
+          <span id="question-counter" class="text-4xl font-bold text-cyan-400"
+            >1</span
+          >
+          <span class="text-slate-400">/</span>
+          <span id="total-questions" class="text-slate-400">3</span>
         </div>
 
-        <div class="question-card bg-slate-900 border border-slate-700 rounded-3xl p-10 mb-8">
-            <div id="question-text" class="text-3xl font-medium leading-tight mb-10"></div>
-            <div id="options-container" class="grid grid-cols-1 gap-4"></div>
+        <div class="flex items-center bg-slate-900 rounded-3xl px-6 py-3">
+          <span class="text-2xl mr-3">⏳</span>
+          <div>
+            <div class="text-xs tracking-widest">QALAN VAXT</div>
+            <div
+              id="timer-display"
+              class="text-4xl font-bold font-mono text-cyan-400"
+            >
+              20
+            </div>
+          </div>
         </div>
 
-        <div class="flex justify-between">
-            <button onclick="prevQuestion()" id="prev-button"
-                    class="px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl flex items-center gap-2">
-                ← Əvvəlki
-            </button>
-            <button onclick="nextQuestion()" id="next-button"
-                    class="px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl flex items-center gap-2">
-                Növbəti →
-            </button>
-        </div>
+        <div
+          id="quiz-category-badge"
+          class="px-6 py-2 bg-gradient-to-r from-cyan-400 to-violet-500 text-slate-950 rounded-3xl font-semibold"
+        ></div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-700 rounded-3xl p-10 mb-8">
+        <div
+          id="question-text"
+          class="text-3xl font-medium leading-tight mb-10"
+        ></div>
+        <div id="options-container" class="grid grid-cols-1 gap-4"></div>
+      </div>
+
+      <div class="flex justify-between">
+        <button
+          onclick="prevQuestion()"
+          id="prev-button"
+          class="px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl flex items-center gap-2"
+        >
+          ← Əvvəlki
+        </button>
+        <button
+          onclick="nextQuestion()"
+          id="next-button"
+          class="px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl flex items-center gap-2"
+        >
+          Növbəti →
+        </button>
+      </div>
     </div>
 
-    <!-- NƏTİCƏ EKRANI -->
-    <div id="result-screen" class="hidden max-w-4xl mx-auto px-8 py-16 text-center">
-        <h2 class="text-6xl font-bold mb-2">Mübarizə Bitdi!</h2>
-        <p id="result-subtitle" class="text-2xl text-slate-400 mb-12"></p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-slate-900 rounded-3xl p-10">
-                <div class="text-7xl font-bold text-cyan-400" id="score-percentage">85</div>
-                <div class="text-sm tracking-widest mt-2">ÜMUMİ BAL</div>
-            </div>
-            
-            <div class="bg-slate-900 rounded-3xl p-10 text-left">
-                <div class="flex items-center gap-4 mb-6">
-                    <span class="text-5xl">✅</span>
-                    <div>
-                        <div id="correct-count" class="text-5xl font-bold text-emerald-400">8</div>
-                        <div class="text-emerald-400">Düzgün cavab</div>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4">
-                    <span class="text-5xl">❌</span>
-                    <div>
-                        <div id="incorrect-count" class="text-5xl font-bold text-red-400">2</div>
-                        <div class="text-red-400">Səhv / Vaxt bitdi</div>
-                    </div>
-                </div>
-            </div>
+    <!-- NƏTİCƏ EKRANI (YENİLƏNİB - Yan-yana və daha gözəl) -->
+    <div id="result-screen" class="hidden max-w-4xl mx-auto px-8 py-16">
+      <div class="text-center mb-12">
+        <h2 class="text-5xl font-bold mb-3">Mübarizə Bitdi!</h2>
+        <p id="result-subtitle" class="text-xl text-slate-400"></p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+        <!-- Düzgün Cavablar -->
+        <div
+          class="result-card rounded-3xl p-10 text-center border border-emerald-500/30"
+        >
+          <div class="text-7xl mb-4">✅</div>
+          <div id="correct-count" class="text-6xl font-bold text-emerald-400">
+            8
+          </div>
+          <div class="text-emerald-400 text-xl font-medium mt-2">
+            DÜZGÜN CAVAB
+          </div>
         </div>
 
-        <div class="mt-16 flex flex-wrap justify-center gap-4">
-            <button onclick="restartSameCategory()" 
-                    class="px-10 py-6 bg-gradient-to-r from-cyan-400 to-violet-500 text-slate-950 rounded-3xl text-xl font-semibold">
-                Eyni Kateqoriyanı Təkrarla
-            </button>
-            <button onclick="goBackToCategories()" 
-                    class="px-10 py-6 bg-slate-800 hover:bg-slate-700 rounded-3xl text-xl font-semibold">
-                Başqa Kateqoriya Seç
-            </button>
+        <!-- Səhv Cavablar -->
+        <div
+          class="result-card rounded-3xl p-10 text-center border border-red-500/30"
+        >
+          <div class="text-7xl mb-4">❌</div>
+          <div id="incorrect-count" class="text-6xl font-bold text-red-400">
+            2
+          </div>
+          <div class="text-red-400 text-xl font-medium mt-2">
+            SƏHV / VAXT BİTDİ
+          </div>
         </div>
+      </div>
+
+      <div class="mt-16 flex flex-wrap justify-center gap-4">
+        <button
+          onclick="restartSameCategory()"
+          class="px-10 py-6 bg-gradient-to-r from-cyan-400 to-violet-500 text-slate-950 rounded-3xl text-xl font-semibold"
+        >
+          Eyni Kateqoriyanı Təkrarla
+        </button>
+        <button
+          onclick="goBackToCategories()"
+          class="px-10 py-6 bg-slate-800 hover:bg-slate-700 rounded-3xl text-xl font-semibold"
+        >
+          Başqa Kateqoriya Seç
+        </button>
+      </div>
     </div>
-
-    <body>
-        
-
-        let currentCategory = null;
-        let currentQuestions = [];
-        let currentIndex = 0;
-        let selectedAnswers = [];
-        let timerInterval = null;
-        let timeLeft = 20;
-
-        function initApp() {
-            renderCategoryCards();
-        }
-
-        function renderCategoryCards() {
-            const grid = document.getElementById('categories-grid');
-            grid.innerHTML = '';
-            
-            categoriesList.forEach(cat => {
-                const card = `
-                <div onclick="startQuiz('${cat.name}')" class="group bg-slate-900 border border-slate-700 hover:border-${cat.color}-400 rounded-3xl p-8 text-center cursor-pointer hover:-translate-y-3">
-                    <div class="text-7xl mb-6">${cat.icon}</div>
-                    <h3 class="text-3xl font-semibold mb-2">${cat.name}</h3>
-                    <p class="text-slate-400 text-sm">20 saniyə / sual</p>
-                </div>`;
-                grid.innerHTML += card;
-            });
-        }
-
-        function startQuiz(categoryName) {
-            currentCategory = categoryName;
-            currentQuestions = questionsData[categoryName];
-            currentIndex = 0;
-            selectedAnswers = new Array(currentQuestions.length).fill(null);
-
-            document.getElementById('category-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            document.getElementById('header-info').classList.remove('hidden');
-            
-            document.getElementById('current-category-display').innerHTML = `${categoryName}`;
-            document.getElementById('quiz-category-badge').innerHTML = categoryName;
-
-            loadCurrentQuestion();
-        }
-
-        function loadCurrentQuestion() {
-            const q = currentQuestions[currentIndex];
-            
-            document.getElementById('question-counter').textContent = currentIndex + 1;
-            document.getElementById('total-questions').textContent = currentQuestions.length;
-            
-            document.getElementById('question-text').innerHTML = `
-                <span class="text-cyan-400 block mb-4">Sual ${currentIndex + 1}</span>
-                ${q.question}
-            `;
-
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-
-            q.options.forEach((option, i) => {
-                const div = document.createElement('div');
-                div.className = `px-8 py-6 bg-slate-800 hover:bg-slate-700 rounded-3xl text-xl cursor-pointer flex items-center`;
-                div.innerHTML = `<span class="font-mono text-cyan-400 w-8">${String.fromCharCode(65 + i)}</span> ${option}`;
-                div.onclick = () => handleAnswerSelection(i);
-                container.appendChild(div);
-            });
-
-            startTimer();
-        }
-
-        function startTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            timeLeft = 20;
-            document.getElementById('timer-display').textContent = timeLeft;
-
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timer-display').textContent = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    handleTimeout();
-                }
-            }, 1000);
-        }
-
-        function handleAnswerSelection(selectedIndex) {
-            if (selectedAnswers[currentIndex] !== null) return;
-            selectedAnswers[currentIndex] = selectedIndex;
-            clearInterval(timerInterval);
-            showFeedback();
-        }
-
-        function showFeedback() {
-            const q = currentQuestions[currentIndex];
-            const selected = selectedAnswers[currentIndex];
-            const options = document.querySelectorAll('#options-container > div');
-
-            options.forEach((opt, i) => {
-                opt.style.pointerEvents = 'none';
-                if (i === q.correct) {
-                    opt.classList.add('!bg-emerald-500', '!text-slate-950');
-                } else if (i === selected) {
-                    opt.classList.add('!bg-red-500', '!text-slate-950');
-                }
-            });
-
-            setTimeout(nextQuestion, 1800);
-        }
-
-        function handleTimeout() {
-            selectedAnswers[currentIndex] = null;
-            showFeedback();
-        }
-
-        function nextQuestion() {
-            currentIndex++;
-            if (currentIndex >= currentQuestions.length) {
-                finishQuiz();
-            } else {
-                loadCurrentQuestion();
-            }
-        }
-
-        function prevQuestion() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                loadCurrentQuestion();
-            }
-        }
-
-        function finishQuiz() {
-            clearInterval(timerInterval);
-            
-            let correctCount = 0;
-            currentQuestions.forEach((q, i) => {
-                if (selectedAnswers[i] === q.correct) correctCount++;
-            });
-
-            const percentage = Math.round((correctCount / currentQuestions.length) * 100);
-
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('result-screen').classList.remove('hidden');
-
-            document.getElementById('score-percentage').textContent = percentage;
-            document.getElementById('correct-count').textContent = correctCount;
-            document.getElementById('incorrect-count').textContent = currentQuestions.length - correctCount;
-            document.getElementById('result-subtitle').innerHTML = `${currentCategory} — ${correctCount} / ${currentQuestions.length} düzgün`;
-        }
-
-        function goBackToCategories() {
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('result-screen').classList.add('hidden');
-            document.getElementById('category-screen').classList.remove('hidden');
-            document.getElementById('header-info').classList.add('hidden');
-        }
-
-        function restartSameCategory() {
-            if (currentCategory) startQuiz(currentCategory);
-        }
-
-        window.onload = initApp;
-    </script>
-</body>
+  </body>
 </html>
