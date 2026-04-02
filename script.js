@@ -1,4 +1,3 @@
-// script.js
 let currentCategory = null;
 let currentQuestions = [];
 let currentIndex = 0;
