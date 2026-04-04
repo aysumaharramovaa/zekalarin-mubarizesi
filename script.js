@@ -63,7 +63,28 @@ function loadCurrentQuestion() {
         container.appendChild(div);
     });
 
-    startTimer();
+    // Timer yalnız əgər cavab seçilməyibsə başlasın
+    if (selectedAnswers[currentIndex] === null) {
+        startTimer();
+    } else {
+        showFeedbackForPreviousAnswer();
+    }
+}
+
+// Yeni funksiya: əvvəl seçilmiş cavabı göstərmək üçün
+function showFeedbackForPreviousAnswer() {
+    const q = currentQuestions[currentIndex];
+    const selected = selectedAnswers[currentIndex];
+    const options = document.querySelectorAll('#options-container > div');
+
+    options.forEach((opt, i) => {
+        opt.style.pointerEvents = 'none'; // artıq klikləməyə icazə yoxdur
+        if (i === q.correct) {
+            opt.classList.add('!bg-emerald-500', '!text-slate-950');
+        } else if (i === selected && i !== q.correct) {
+            opt.classList.add('!bg-red-500', '!text-slate-950');
+        }
+    });
 }
 
 function startTimer() {
