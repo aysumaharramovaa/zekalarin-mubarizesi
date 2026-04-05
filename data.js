@@ -1,25 +1,25 @@
 const questionsData = {
   Riyaziyyat: [
-    {
-      id: 1,
-      question: "2³ + 3² − 5 ifadəsinin dəyəri nə qədərdir?",
-      options: ["12", "18", "10", "15"],
-      correct: 2,
-    },
-    {
-      id: 2,
-      question:
-        "Daxili bucaqları 45° və 65° olan üçbucağın üçüncü bucağı neçə dərəcədir?",
-      options: ["70°", "80°", "90°", "110°"],
-      correct: 0,
-    },
-    {
-      id: 3,
-      question: "1, 1, 2, 3, 5, 8... ardıcıllığında növbəti ədəd hansıdır?",
-      options: ["11", "12", "13", "14"],
-      correct: 1,
-    },
-  ],
+  {
+    id: 1,
+    question: "2³ + 3² − 5 ifadəsinin dəyəri nə qədərdir?",
+    options: ["12", "18", "10", "15"],
+    correct: 0,
+  },
+  {
+    id: 2,
+    question:
+      "Daxili bucaqları 45° və 65° olan üçbucağın üçüncü bucağı neçə dərəcədir?",
+    options: ["70°", "80°", "90°", "110°"],
+    correct: 0,
+  },
+  {
+    id: 3,
+    question: "1, 1, 2, 3, 5, 8... ardıcıllığında növbəti ədəd hansıdır?",
+    options: ["11", "12", "13", "14"],
+    correct: 2,
+  },
+],
   "Rəqəmsal Texnologiyalar": [
     {
       id: 1,
