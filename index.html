@@ -5,27 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zəkaların Mübarizəsi II</title>
     <link src="style.css" rel="stylesheet" />
-      <link rel="icon" type="image/x-icon" href="icon.jpg">
+    <link rel="icon" type="image/x-icon" href="icon.jpg" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
   </head>
-  <body class="bg-slate-950 text-slate-200 min-h-screen">
+  <body class="bg-gradient-to-b from-blue-50/50 to-blue-50/50 text-slate-950 min-h-screen">
     <!-- HEADER -->
     <header
-      class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50"
+      class="border-b border-blue-200 bg-blue-50/70 backdrop-blur-xl sticky top-0 z-50"
     >
       <div
         class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between"
       >
         <div class="flex items-center gap-x-3">
-          <div
-            class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-2xl flex items-center justify-center text-3xl"
-          ></div>
-          <!-- <h1 class="text-3xl font-semibold tracking-tighter logo-glow">
-            Zəkaların Mübarizəsi <span class="text-cyan-400">II</span>
-          </h1> -->
+          <div class="flex items-center gap-2">
+            <img
+              src="heydar-aliyev-logo.png"
+              alt="Icon 2"
+              class="w-[80px] sm:w-[90px] md:w-[100px] lg:w-[140px] object-contain p-1"
+            />
+
+            <img
+              src="elm-tehsil-naziriyi-logo.png"
+              alt="Icon 1"
+              class="w-[80px] sm:w-[90px] md:w-[100px] lg:w-[140px] object-contain p-1"
+            />
+            <a
+              aria-current="page"
+              href="/"
+              class="router-link-active router-link-exact-active text-xs sm:text-sm md:text-xl lg:text-2xl font-poppins font-bold bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text hover:from-blue-600 hover:to-blue-400 transition-all duration-300 max-w-[120px] sm:max-w-full"
+            >
+              Zəkaların mübarizəsi
+            </a>
+          </div>
         </div>
 
         <div
@@ -34,14 +48,14 @@
         >
           <div
             onclick="goBackToCategories()"
-            class="flex items-center gap-x-2 cursor-pointer hover:text-cyan-400"
+            class="flex items-center gap-x-2 cursor-pointer hover:text-blue-500"
           >
             <span class="text-xl">←</span>
             <span>Kateqoriyalara qayıt</span>
           </div>
           <div
             id="current-category-display"
-            class="px-5 py-2 bg-slate-900 rounded-3xl text-cyan-400 font-medium"
+            class="px-5 py-2 bg-blue-100 rounded-3xl text-blue-600 font-medium"
           ></div>
         </div>
       </div>
@@ -50,10 +64,10 @@
     <!-- KATEQORİYA EKRANI -->
     <div id="category-screen" class="max-w-7xl mx-auto px-8 py-12">
       <div class="text-center mb-16">
-        <h2 class="text-5xl font-semibold tracking-tighter mb-4">
+        <h2 class="text-5xl font-semibold tracking-tighter mb-4 text-blue-900">
           Zəkaların Mübarizəsi II
         </h2>
-        <p class="text-slate-400 text-xl">Kateqoriya seçin</p>
+        <p class="text-blue-700 text-xl">Kateqoriya seçin</p>
       </div>
       <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
@@ -63,24 +77,21 @@
 
     <!-- QUIZ EKRANI -->
     <div id="quiz-screen" class="hidden max-w-4xl mx-auto px-8 py-10">
-      <!-- ... (quiz ekranı eyni qalır) ... -->
       <div class="flex justify-between items-center mb-8">
         <div class="flex items-center gap-x-4">
-          <span class="font-medium">Sual</span>
-          <span id="question-counter" class="text-4xl font-bold text-cyan-400"
-            >1</span
-          >
-          <span class="text-slate-400">/</span>
-          <span id="total-questions" class="text-slate-400">3</span>
+          <span class="font-medium text-blue-800">Sual</span>
+          <span id="question-counter" class="text-4xl font-bold text-blue-600">1</span>
+          <span class="text-blue-400">/</span>
+          <span id="total-questions" class="text-blue-400">3</span>
         </div>
 
-        <div class="flex items-center bg-slate-900 rounded-3xl px-6 py-3">
+        <div class="flex items-center bg-blue-100 rounded-3xl px-6 py-3">
           <span class="text-2xl mr-3">⏳</span>
           <div>
-            <div class="text-xs tracking-widest">QALAN VAXT</div>
+            <div class="text-xs tracking-widest text-blue-600">QALAN VAXT</div>
             <div
               id="timer-display"
-              class="text-4xl font-bold font-mono text-cyan-400"
+              class="text-4xl font-bold font-mono text-blue-700"
             >
               20
             </div>
@@ -89,14 +100,14 @@
 
         <div
           id="quiz-category-badge"
-          class="px-6 py-2 bg-gradient-to-r from-cyan-400 to-violet-500 text-slate-950 rounded-3xl font-semibold"
+          class="px-6 py-2 bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-3xl font-semibold"
         ></div>
       </div>
 
-      <div class="bg-slate-900 border border-slate-700 rounded-3xl p-10 mb-8">
+      <div class="bg-blue-100 border border-blue-200 rounded-3xl p-10 mb-8">
         <div
           id="question-text"
-          class="text-3xl font-medium leading-tight mb-10"
+          class="text-3xl font-medium leading-tight mb-10 text-blue-800"
         ></div>
         <div
           id="options-container"
@@ -108,65 +119,53 @@
         <button
           onclick="prevQuestion()"
           id="prev-button"
-          class="px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl flex items-center gap-2"
+          class="px-8 py-4 bg-blue-200 hover:bg-blue-300 rounded-3xl flex items-center gap-2 text-blue-900 font-semibold"
         >
           ← Əvvəlki
         </button>
         <button
           onclick="nextQuestion()"
           id="next-button"
-          class="px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-3xl flex items-center gap-2"
+          class="px-8 py-4 bg-blue-200 hover:bg-blue-300 rounded-3xl flex items-center gap-2 text-blue-900 font-semibold"
         >
           Növbəti →
         </button>
       </div>
     </div>
 
-    <!-- NƏTİCƏ EKRANI (YENİLƏNİB - Yan-yana və daha gözəl) -->
+    <!-- NƏTİCƏ EKRANI -->
     <div id="result-screen" class="hidden max-w-4xl mx-auto px-8 py-16">
       <div class="text-center mb-12">
-        <h2 class="text-5xl font-bold mb-3">Mübarizə Bitdi!</h2>
-        <p id="result-subtitle" class="text-xl text-slate-400"></p>
+        <h2 class="text-5xl font-bold mb-3 text-blue-900">Mübarizə Bitdi!</h2>
+        <p id="result-subtitle" class="text-xl text-blue-700"></p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
         <!-- Düzgün Cavablar -->
-        <div
-          class="result-card rounded-3xl p-10 text-center border border-emerald-500/30"
-        >
+        <div class="result-card rounded-3xl p-10 text-center border border-emerald-500/30">
           <div class="text-7xl mb-4">✅</div>
-          <div id="correct-count" class="text-6xl font-bold text-emerald-400">
-            8
-          </div>
-          <div class="text-emerald-400 text-xl font-medium mt-2">
-            DÜZGÜN CAVAB
-          </div>
+          <div id="correct-count" class="text-6xl font-bold text-emerald-500">8</div>
+          <div class="text-emerald-500 text-xl font-medium mt-2">DÜZGÜN CAVAB</div>
         </div>
 
         <!-- Səhv Cavablar -->
-        <div
-          class="result-card rounded-3xl p-10 text-center border border-red-500/30"
-        >
+        <div class="result-card rounded-3xl p-10 text-center border border-red-500/30">
           <div class="text-7xl mb-4">❌</div>
-          <div id="incorrect-count" class="text-6xl font-bold text-red-400">
-            2
-          </div>
-          <div class="text-red-400 text-xl font-medium mt-2">
-            SƏHV / VAXT BİTDİ
-          </div>
+          <div id="incorrect-count" class="text-6xl font-bold text-red-500">2</div>
+          <div class="text-red-500 text-xl font-medium mt-2">SƏHV / VAXT BİTDİ</div>
         </div>
       </div>
 
       <div class="mt-16 flex flex-wrap justify-center gap-4">
         <button
           onclick="restartSameCategory()"
-          class="px-10 py-6 bg-gradient-to-r from-cyan-400 to-violet-500 text-slate-950 rounded-3xl text-xl font-semibold"
+          class="px-10 py-6 bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-3xl text-xl font-semibold"
         >
           Eyni Kateqoriyanı Təkrarla
         </button>
         <button
           onclick="goBackToCategories()"
-          class="px-10 py-6 bg-slate-800 hover:bg-slate-700 rounded-3xl text-xl font-semibold"
+          class="px-10 py-6 bg-blue-200 hover:bg-blue-300 rounded-3xl text-blue-900 text-xl font-semibold"
         >
           Başqa Kateqoriya Seç
         </button>

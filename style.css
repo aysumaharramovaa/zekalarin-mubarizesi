@@ -4,12 +4,3 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.logo-glow {
-  text-shadow:
-    0 0 20px #00d4ff,
-    0 0 40px #00d4ff;
-}
-
-.result-card {
-  background: linear-gradient(145deg, #1e2937, #0f172a);
-}
