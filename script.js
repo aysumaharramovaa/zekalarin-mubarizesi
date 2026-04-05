@@ -173,12 +173,12 @@ function finishQuiz() {
     "none";
 }
 
-function goBackToCategories() {
-  document.getElementById("quiz-screen").classList.add("hidden");
-  document.getElementById("result-screen").classList.add("hidden");
-  document.getElementById("category-screen").classList.remove("hidden");
-  document.getElementById("header-info").classList.add("hidden");
-}
+// function goBackToCategories() {
+//   document.getElementById("quiz-screen").classList.add("hidden");
+//   document.getElementById("result-screen").classList.add("hidden");
+//   document.getElementById("category-screen").classList.remove("hidden");
+//   document.getElementById("header-info").classList.add("hidden");
+// }
 
 function restartSameCategory() {
   if (currentCategory) startQuiz(currentCategory);
